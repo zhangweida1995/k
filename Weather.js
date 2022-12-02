@@ -5,18 +5,19 @@ class Weather {
         data: null
     }
     timeStamp = () => new Date().getTime()
-    componentDidMount() {
+    componentDidMount(callback) {
         fetch(`${this.state.positionApi}?_=${this.timeStamp()}`)
             .then(res => res.json())
             .then(res => {
-                this.getWeather(res.code)
+                this.getWeather(res.code, callback)
             })
     }
-    getWeather = (stationid) => {
+    getWeather = (stationid, callback) => {
         fetch(`${this.state.weatherApi}?stationid=${stationid}&_=${this.timeStamp()}`)
             .then(res => res.json())
             .then(res => {
-                this.setState({ data: res.data.predict })
+                this.state.data = res.data.predict
+                callback && callback(this.render())
             })
     }
 
@@ -28,46 +29,46 @@ class Weather {
         return dayWeather || nightWeather
     }
     getWind = (wind) => {
-        return wind == '9999' ? null : wind
+        return wind == '9999' ? '' : wind
     }
     getTemperature = (dayTe, nightTe) => {
         if (dayTe == '9999') return nightTe + '°C'
         else if (nightTe == '9999') return dayTe + '°C'
         return `${dayTe}°C ~ ${nightTe}°C`
     }
-    /**
-     * 
-     * @returns 
+
     render() {
         if (this.state.data) {
             const { data } = this.state
+            console.log('%c [ data ]-43', 'font-size:13px; background:pink; color:#bf2c9f;', data)
             const { data: { detail } } = this.state
             const currentDay = Array.isArray(detail) && detail[0] ? detail[0] : {}
             const { day, night } = currentDay
             const [direct, power] = [this.getWind(day.wind.direct), this.getWind(day.wind.power)]
             const isSplitLine = direct && power
             return (
-                <div className='weather-wrap'>
-                    <div className='weather'>
-                        <h1>{this.transfer(day.weather.info, night.weather.info)}</h1>
+                ` <div class='weather-wrap'>
+                    <div class='weather'>
+                        <h1>${this.transfer(day.weather.info, night.weather.info)}</h1>
                     </div>
-                    <div className='temperature'>
-                        {this.getTemperature(day.weather.temperature, night.weather.temperature)}
-                        {isSplitLine && (<span className='split-line'>|</span>)}
+                    <div class='temperature'>
+                        ${this.getTemperature(day.weather.temperature, night.weather.temperature)}
+                        ${isSplitLine && '<span class="split-line">|</span>'}
                     </div>
-                    <div className='wind'>
-                        {direct} {power}
+                    <div class='wind'>
+                        ${direct} ${power}
                     </div>
-                    <div className='station'>
-                        <h4>{data.station.province}•{data.station.city}</h4>
+                    <div class='station'>
+                        <h4>${data.station.province}•${data.station.city}</h4>
                     </div>
-                    <div className='divider'></div>
+                    <div class='divider'></div>
                 </div>
+                `
             )
         }
 
     }
-     */
+
 
 
 }

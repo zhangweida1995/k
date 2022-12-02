@@ -8,19 +8,30 @@
     <link rel="stylesheet" href="./index.css">
     <script src="./utils.js"></script>
     <script src="./Time.js"></script>
+    <script src="./Weather.js"></script>
+    <script src="./RadioBroad.js"></script>
     <title>Kindle天气时钟</title>
 </head>
 
 <body>
     <div id="root">
-
+        <div id="datetime"></div>
+        <div id="weather"></div>
+        <div id="radioBroad"></div>
     </div>
     <script type="text/javascript">
         const myTime = new Time()
-        function getTemplate(template) {
-            document.getElementById('root').innerHTML = template
-        }
-        myTime.componentDidMount(getTemplate)
+        const myWeather = new Weather()
+        const myRadioBroad = new RadioBroad()
+        myTime.componentDidMount((template) => {
+            document.getElementById('datetime').innerHTML = template
+        })
+        myWeather.componentDidMount((template) => {
+            document.getElementById('weather').innerHTML = template
+        })
+        myRadioBroad.componentDidMount((template) => {
+            document.getElementById('radioBroad').innerHTML = template
+        })
 
     </script>
 </body>
