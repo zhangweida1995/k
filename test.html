@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        let alink = document.createElement('a')
+        alink.href = 'http://www.nmc.cn/rest/position'
+        alink.target = '_self'
+        alink.click()
+        let preText = document.getElementsByTagName('pre').innerText
+        console.log('%c [ preText ]-33', 'font-size:13px; background:pink; color:#bf2c9f;', preText)
+    </script>
+</body>
+
+</html>
