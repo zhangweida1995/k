@@ -1,0 +1,66 @@
+let chineseDate = getChineseDate()
+class Time {
+    state = {
+        date: new Date(),
+        template: '',
+    }
+    timer = null
+    componentDidMount(callback) {
+        clearInterval(this.timer)
+        this.timer = setInterval(() => {
+            this.state.date = new Date()
+            this.state.template = this.render()
+            callback && callback(this.state.template)
+        }, 1000)
+    }
+    getLocalDate = () => {
+        const { date } = this.state
+        const year = date.getFullYear()
+        const month = date.getMonth() + 1
+        const day = date.getDate()
+        return `${year}年${month}月${day}日`
+    }
+    getWeek = (day) => {
+        const weekEnum = {
+            0: '星期日',
+            1: '星期一',
+            2: '星期二',
+            3: '星期三',
+            4: '星期四',
+            5: '星期五',
+            6: '星期六',
+        }
+        return weekEnum[day]
+    }
+    getLocaleTime = () => {
+        const { date } = this.state
+        const add0 = (num) => {
+            num = num.toString()
+            return num.length === 1 ? `0${num}` : num
+        }
+        let hours = date.getHours(), minute = date.getMinutes(), seconds = date.getSeconds()
+
+        return `${add0(hours)}:${add0(minute)}:${add0(seconds)}`
+    }
+    render() {
+        const { date } = this.state
+        return (
+            `<div class='time-wrap'>
+                <h2 class='date-week'>
+                    ${this.getLocalDate()}
+                    &nbsp;
+                    &nbsp;
+                    ${this.getWeek(date.getDay())}
+                </h2>
+                <h4>
+                    <span>${chineseDate.g}</span>&nbsp;
+                    <span>${chineseDate.a}</span>&nbsp;
+                    <span>${chineseDate.m}</span>
+                    <span>${chineseDate.d}</span>
+                </h4>
+                <h1 class='time'>${this.getLocaleTime()}</h1>
+            </div>
+            `
+        )
+    }
+} 
