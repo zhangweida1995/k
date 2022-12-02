@@ -7,11 +7,12 @@ class Time {
     timer = null
     componentDidMount(callback) {
         clearInterval(this.timer)
-        this.timer = setInterval(() => {
+        const init = () => {
             this.state.date = new Date()
             this.state.template = this.render()
             callback && callback(this.state.template)
-        }, 1000)
+        }
+        init() && (this.timer = setInterval(init, 1000))
     }
     getLocalDate = () => {
         const { date } = this.state
