@@ -18,12 +18,16 @@
         <div id="datetime"></div>
         <div id="weather"></div>
         <div id="radioBroad"></div>
-        <a href='http://www.nmc.cn/rest/position'>999</a>
+        <a id="position" target="_blank" href='http://www.nmc.cn/rest/position'>999</a>
+        <iframe src="http://www.nmc.cn/rest/position" frameborder="0"></iframe>
     </div>
     <script type="text/javascript">
         const myTime = new Time()
         const myWeather = new Weather()
         const myRadioBroad = new RadioBroad()
+        let alink = document.createElement('a')
+        alink.href = 'http://www.nmc.cn/rest/position'
+        // alink.click()
         myTime.componentDidMount((template) => {
             document.getElementById('datetime').innerHTML = template
         })
