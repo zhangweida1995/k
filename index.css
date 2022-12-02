@@ -1,0 +1,23 @@
+
+@font-face {
+    font-family: "digital";
+    src: url("./digital-7-4.ttf");
+  }
+@font-face {
+    font-family: "PUTHIAfont";
+    src: url("./PUTHIAfont.ttf");
+}
+
+body{
+    text-align: center;
+}
+.time-wrap .date-week{
+    font-family:PUTHIAfont, digital;
+}
+.time-wrap .time{
+    font-size: 5rem;
+    font-family:PUTHIAfont, digital;
+    background: black;
+    color: white;
+    margin:20px !important;
+}
