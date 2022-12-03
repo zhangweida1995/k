@@ -2,11 +2,14 @@ class RadioBroad {
     componentDidMount(callback) {
         callback && callback(this.render())
     }
-    render() {
+    random() {
         let index = Math.floor(Math.random() * sentence.length)
+        return sentence[index]
+    }
+    render() {
         return (
-            `<div style="padding: 0 20px">
-                ${sentence[index]}
+            `<div style="padding: 0 20px" onclick="generateRadioBroad()">
+                ${this.random()}
             </div>`
         )
     }

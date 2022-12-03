@@ -30,9 +30,12 @@
         myWeather.componentDidMount((template) => {
             document.getElementById('weather').innerHTML = template
         })
-        myRadioBroad.componentDidMount((template) => {
-            document.getElementById('radioBroad').innerHTML = template
-        })
+        function generateRadioBroad() {
+            myRadioBroad.componentDidMount((template) => {
+                document.getElementById('radioBroad').innerHTML = template
+            })
+        }
+        generateRadioBroad()
 
     </script>
 </body>
