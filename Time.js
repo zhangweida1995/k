@@ -11,6 +11,7 @@ class Time {
             this.state.date = new Date()
             this.state.template = this.render()
             callback && callback(this.state.template)
+            return true
         }
         init() && (this.timer = setInterval(init, 1000))
     }
